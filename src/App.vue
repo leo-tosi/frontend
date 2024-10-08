@@ -1,28 +1,33 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <div class="container">
+    <h1>测试数据生成器</h1>
+    <!-- 确保组件在这里被使用 -->
+    <template-selector @template-selected="loadTemplate" />
+    <config-form :template-data="templateData" @generate="generateData" />
+   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ConfigForm from './components/ConfigForm.vue';
+import TemplateSelector from './components/TemplateSelector.vue';
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    ConfigForm,
+    TemplateSelector,
+  },
+  data() {
+    return {
+      templateData: null,
+    };
+  },
+  methods: {
+    loadTemplate(template) {
+      this.templateData = template;
+    },
+    generateData(data) {
+      console.log('生成的数据:', data);
+    },
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
